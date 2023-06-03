@@ -40,6 +40,11 @@
             <artifactId>webdriver-chrome</artifactId>
             <version>0.9.7376</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.dpaukov</groupId>
+            <artifactId>combinatoricslib3</artifactId>
+            <version>3.3.3</version>
+        </dependency>
     </dependencies>
 
 </project>

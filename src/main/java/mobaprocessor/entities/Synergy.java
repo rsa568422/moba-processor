@@ -1,9 +1,8 @@
 package mobaprocessor.entities;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import mobaprocessor.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -23,7 +22,7 @@ public class Synergy {
 
     @Override
     public String toString() {
-        return gson.toJson(this);
+        return Constants.gson.toJson(this);
     }
 
     @Override
@@ -39,6 +38,10 @@ public class Synergy {
         return Objects.hash(name, levels, champions);
     }
 
+    public static String getName(WebElement row) {
+        return row.findElement(By.xpath("div[1]/div[1]/div/p/span")).getText();
+    }
+
     public static Synergy valueOf(WebElement row) {
         String name = getName(row);
         List<Integer> levels = getLevels(row)
@@ -50,10 +53,6 @@ public class Synergy {
                 .map(Synergy::getChampionName)
                 .collect(Collectors.toList());
         return new Synergy(name, levels.isEmpty() ? List.of(1) : levels, champions);
-    }
-
-    public static String getName(WebElement row) {
-        return row.findElement(By.xpath("div[1]/div[1]/div/p/span")).getText();
     }
 
     private static List<WebElement> getLevels(WebElement row) {
@@ -71,6 +70,4 @@ public class Synergy {
     private static String getChampionName(WebElement champion) {
         return champion.findElement(By.xpath("a/div[2]")).getText();
     }
-
-    private static final Gson gson = new GsonBuilder().create();
 }

@@ -1,10 +1,9 @@
 package mobaprocessor.entities;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import mobaprocessor.Constants;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +18,7 @@ public class Champion {
 
     @Override
     public String toString() {
-        return gson.toJson(this);
+        return Constants.gson.toJson(this);
     }
 
     public static List<Champion> getChampions(List<Synergy> classes, List<Synergy> origins) {
@@ -41,6 +40,4 @@ public class Champion {
             return new Champion(name, championClasses, championOrigins);
         }).collect(Collectors.toList());
     }
-
-    private static final Gson gson = new GsonBuilder().create();
 }
