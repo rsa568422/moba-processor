@@ -49,7 +49,7 @@ public class Synergy {
                 .stream()
                 .map(Synergy::getChampionName)
                 .collect(Collectors.toList());
-        return new Synergy(name, levels, champions);
+        return new Synergy(name, levels.isEmpty() ? List.of(1) : levels, champions);
     }
 
     public static String getName(WebElement row) {
