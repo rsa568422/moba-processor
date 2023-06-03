@@ -104,7 +104,9 @@ public class Main {
     private static void saveSynergies(Target target) {
         List<Synergy> synergies = getSynergiesFromWeb(target);
         try {
-            Files.writeString(Path.of(String.format("%s%s.json", ROOT, target)), gson.toJson(synergies));
+            Path path = Path.of(String.format("%s%s.json", ROOT, target));
+            if (Files.exists(path)) Files.delete(path);
+            Files.writeString(path, gson.toJson(synergies));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
